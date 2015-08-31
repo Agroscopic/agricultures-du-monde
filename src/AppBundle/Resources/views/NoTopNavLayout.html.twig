@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agricultures du Monde | {% block title %}{% endblock %}</title>
+
+    {% block stylesheets %}
+        {% stylesheets output="assets/css/compiled/notopnavlayout.css" filter="cssrewrite"
+        'bundles/app/css/bootstrap.min.css'
+        'bundles/app/font-awesome/css/font-awesome.css'
+        'bundles/app/css/inspinia.css'
+        'bundles/app/css/animate.css'
+        'bundles/app/css/plugins/toastr/toastr.min.css'
+        'bundles/app/css/agroscopic.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% block extraheadcontent %}
+    {% endblock %}
+</head>
+
+<body class={% block bodyclass %}"skin-3"{% endblock %}>
+        <div id="wrapper">
+            <nav class="navbar-default  navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    {% block closeNavbar %}
+                    {% endblock %}
+                    <ul class="nav">
+                        {% include 'AppBundle:Commons:nav-header.html.twig' %}
+                    </ul>
+                        <ul class="nav" id="side-menu">
+                        {% block menus %}
+                            {% include 'AppBundle:Commons:nav-side.html.twig' %}
+                        {% endblock %}
+                    </ul>
+                </div>
+            </nav>
+            <div id="page-wrapper" class={% block pagewrapperclass %}"gray-bg"{% endblock %}>
+                {% block dashboardheader %}
+                    <div id="dashboard-header" class="row  border-bottom white-bg dashboard-header">
+                        <div class="col-sm-12">
+                            Bienvenue !
+                        </div>
+                    </div>
+                {% endblock %}
+                {% block pageheading %}
+                    <div id="page-heading" class="row wrapper border-bottom white-bg page-heading" {% block pageheadingstyle %}{% endblock %}>
+                        <div class="col-lg-10">
+                            {% block breadcrumb %}
+                                <h2>Diagnostic Agraire</h2>
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Accueil</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Rapports</a>
+                                    </li>
+                                    <li class="active">
+                                        <strong>Diagnostic Agraire</strong>
+                                    </li>
+                                </ol>
+                            {% endblock %}
+                        </div>
+                        <div class="col-lg-2">
+                        </div>
+                    </div>
+                {% endblock %}
+                {# Début Page Content #}
+                <div class="row">
+                    <div class={% block wrappercontentclass %}"wrapper wrapper-content"{% endblock %}>
+                     {# Options du pagewrapperclass :
+                        "wrapper wrapper-content"
+                        "wrapper wrapper-content animated fadeInRight" pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options)
+                        "wrapper wrapper-content animated fadeInRight article"
+                        "fh-breadcrumb"
+                        #}
+                        {% block pagecontent %}
+                        {% endblock %}
+                    </div>
+                </div>
+                {# Fin Page Content #}
+                <div class="row">
+                    <div class={% block footerclass %}"footer"{% endblock %} style="z-index: 9998;">
+                     {# Options du footerclass :
+                        "footer"
+                        "footer fixed"
+                        #}
+                        <div class="pull-right">
+                            Atlas Numérique des Agricultures du Monde - {{ "now" | date("Y")}}.
+                        </div>
+                    </div>
+                </div>
+
+            </div> {# end page wrapper #}
+
+            {% block plugins %}
+                {# Fenêtre de Chat
+                {% include 'ADMCoreBundle:Plugins:chatbox.html.twig' %} #}
+                {# Fenêtre d'options à droite
+                {% include 'ADMCoreBundle:Plugins:right-sidebar.html.twig' %} #}
+            {% endblock %}
+        </div> {# end full wrapper #}
+
+        {% block javascripts %}
+            {% javascripts
+            '@AppBundle/Resources/public/js/jquery-2.1.1.js'
+            '@AppBundle/Resources/public/js/bootstrap.min.js'
+            '@AppBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
+            '@AppBundle/Resources/public/js/plugins/pace/pace.min.js'
+            '@AppBundle/Resources/public/js/inspinia.js'
+            '@AppBundle/Resources/public/js/plugins/toastr/toastr.min.js'
+            '@AppBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
+            '@AppBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
+            output='assets/js/compiled/base.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+        {% block extrascripts %}
+            <script type="text/javascript">
+                $('body.canvas-menu .sidebar-collapse').slimScroll({
+                    height: '100%',
+                    railOpacity: 0.9
+                });
+            </script>
+        {% endblock %}
+    </body>
+    </html>

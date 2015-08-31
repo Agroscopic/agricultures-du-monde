@@ -1,0 +1,149 @@
+{% extends 'AppBundle::NoTopNavLayout.html.twig' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block extraheadcontent %}
+    {{ parent() }}
+    <style>
+    .static-map {
+    width: 100%;
+    }
+
+    </style>
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block bodyclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du bodyclass : "skin-1"  "skin-2" "skin-3" "mini-navbar" "fixed-sidebar" : dans ce cas ne pas oublier d'ajouter le script slimScroll qui se trouve dans js/inspinia.js file et décommenter le Fixed Sidebar comment and uncomment function et ajouter <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+"fixed-nav" : dans ce cas mettre navbar-fixed-top si body class = fixed-nav dans <nav>   En mettant mini-navbar ET fixed-sidebar ET fixed-nav, on ne voit plus du tout la barre de navigation de gauche et la barre du haut devient fixe (pour Rapports de stage peut-être), "canvas-menu"pour le OffCanvasLayout #}
+
+{% block closeNavbar %}
+{% endblock %}
+{# Ajouter <a class="close-canvas-menu"><i class="fa fa-times"></i></a> si bodyclass=canvas-menu #}
+
+{% block menus %}
+    {{ parent() }}
+{% endblock %}
+
+{% block pagewrapperclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du pagewrapperclass : "gray-bg" "gray-bg dashboard-1" mais ça a pas l'air de servir grand chose "gray-bg sidebar-content" ajoute une jolie barre sur la droite  (peut-être pour mettre le sommaire des rapports). Par contre pas toujours terrible pour les téléphones car elle est prioritaireIl faut créer un <div class="sidebard-panel">. Voir exemple #}
+
+{% block navbarclass %}
+    {{ parent() }}
+{% endblock %}
+{# navbar-fixed-top si body class = fixed-nav #}
+
+{% block topnav %}
+{% endblock %}
+
+{# On met soit le block dashboardheader ou pageheading mais pas les deux, on peut aussi les enlever tous les deux. Je mets du contenu pour l'exemple #}
+{% block dashboardheader %}
+{% endblock %}
+
+{% block pageheading %}
+{% endblock %}
+
+{% block wrappercontentclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du pagewrapperclass : "wrapper wrapper-content" "wrapper wrapper-content animated fadeInRight" voire "wrapper wrapper-content animated fadeInRight article"pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options) #}
+
+{% block pagecontent %}
+    <div class="col-lg-12" style="margin-top: 20px;">
+
+        <div class="ibox-title">
+            <h5>Information</h5>
+        </div>
+        <div class="ibox-content">
+            <div>
+                Ce site est en cours de construction, merci de patienter encore quelques temps avant de pouvoir en profiter.
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footerclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du footerclass : "footer" "footer fixed" #}
+
+{% block plugins %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block extrascripts %}
+   <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiaHVnb2xlaG91eCIsImEiOiItOHl6Sm5jIn0.12l_k0K_Z28UE-Jc0kDgpw';
+    var size = [400, 267];
+
+    document.getElementById('static-map').src =
+    'https://api.tiles.mapbox.com/v4/hugolehoux.m2a2l7dj/' +
+    0 + ',' + 20 + ',' +
+    1 + '/' +
+    size.join('x') + '.png' +
+    '?access_token=' + L.mapbox.accessToken;
+
+    document.getElementById('static-map-2').src =
+            'https://api.tiles.mapbox.com/v4/hugolehoux.mi8n7fe4/' +
+            0 + ',' + 20 + ',' +
+            1 + '/' +
+            size.join('x') + '.png' +
+            '?access_token=' + L.mapbox.accessToken;
+   </script>
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.info('Le site est en cours de construction merci de votre compréhension', '');
+            }, 1300);
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('.file-box').each(function() {
+                animationHover(this, 'pulse');
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
