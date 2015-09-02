@@ -1,4 +1,4 @@
-<?
+<?php
 namespace AppBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader;

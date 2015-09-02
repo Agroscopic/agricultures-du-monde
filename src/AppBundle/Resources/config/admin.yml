@@ -1,9 +1,11 @@
 services:
     sonata.admin.report:
-        class: AppBundle\Admin\PostAdmin
+        class: AppBundle\Admin\ReportAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Contenu", label: "Rapport" }
         arguments:
             - ~
             - AppBundle\Entity\Report
             - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
