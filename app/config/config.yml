@@ -39,7 +39,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ['AppBundle','FOSUserBundle']
+    bundles:        ['AppBundle','FOSUserBundle','ApplicationSonataUserBundle','SonataUserBundle','SonataAdminBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -72,9 +72,14 @@ swiftmailer:
 
 # FOSUser Configuration
 fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: AppBundle\Entity\User
+    db_driver:      orm # can be orm or odm
+    firewall_name:  main
+    user_class:     Application\Sonata\UserBundle\Entity\User
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+    service:
+        user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
     registration:
         confirmation:
             enabled: true
@@ -86,6 +91,12 @@ fos_user:
             from_email:
                 address:        resetting-password@agroscopic.org
                 sender_name:    Atlas des Agricultures du Monde
+    group:
+        group_class:   Sonata\UserBundle\Entity\BaseGroup
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager
 
 # Sluggable Extension
 stof_doctrine_extensions:
@@ -103,8 +114,8 @@ sonata_block:
 
         #sonata.admin_doctrine_orm.block.audit:
         #    contexts:   [admin]
-        #sonata.user.block.menu:    # used to display the menu in profile pages
-        #sonata.user.block.account: # used to display menu option (login option)
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
         sonata.block.service.text: # used to if you plan to use Sonata user routes
         sonata.block.service.rss:
 
@@ -113,3 +124,6 @@ sonata_block:
         #sonata.media.block.gallery:
         #sonata.media.block.feature_media:
 
+sonata_user:
+    security_acl: true
+    manager_type: orm
