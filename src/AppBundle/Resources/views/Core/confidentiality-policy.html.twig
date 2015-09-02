@@ -1,0 +1,207 @@
+{% extends 'AppBundle::NoTopNavLayout.html.twig' %}
+
+{% block title %}
+    Politique de confidentialité
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block extraheadcontent %}
+    {{ parent() }}
+{% endblock %}
+
+{% block bodyclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du bodyclass : "skin-1"  "skin-2" "skin-3" "mini-navbar" "fixed-sidebar" : dans ce cas ne pas oublier d'ajouter le script slimScroll qui se trouve dans js/inspinia.js file et décommenter le Fixed Sidebar comment and uncomment function et ajouter <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+"fixed-nav" : dans ce cas mettre navbar-fixed-top si body class = fixed-nav dans <nav>   En mettant mini-navbar ET fixed-sidebar ET fixed-nav, on ne voit plus du tout la barre de navigation de gauche et la barre du haut devient fixe (pour Rapports de stage peut-être), "canvas-menu"pour le OffCanvasLayout #}
+
+{% block closeNavbar %}
+{% endblock %}
+{# Ajouter <a class="close-canvas-menu"><i class="fa fa-times"></i></a> si bodyclass=canvas-menu #}
+
+{% block menus %}
+    {{ parent() }}
+{% endblock %}
+
+{% block pagewrapperclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du pagewrapperclass : "gray-bg" "gray-bg dashboard-1" mais ça a pas l'air de servir grand chose "gray-bg sidebar-content" ajoute une jolie barre sur la droite  (peut-être pour mettre le sommaire des rapports). Par contre pas toujours terrible pour les téléphones car elle est prioritaireIl faut créer un <div class="sidebard-panel">. Voir exemple #}
+
+{% block navbarclass %}
+    {{ parent() }}
+{% endblock %}
+{# navbar-fixed-top si body class = fixed-nav #}
+
+{% block topnav %}
+{% endblock %}
+
+{# On met soit le block dashboardheader ou pageheading mais pas les deux, on peut aussi les enlever tous les deux. Je mets du contenu pour l'exemple #}
+{% block dashboardheader %}
+{% endblock %}
+
+{% block pageheading %}
+{% endblock %}
+
+{% block wrappercontentclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du pagewrapperclass : "wrapper wrapper-content" "wrapper wrapper-content animated fadeInRight" voire "wrapper wrapper-content animated fadeInRight article"pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options) #}
+
+{% block pagecontent %}
+    <div class="col-lg-12" style="margin-top: 20px;">
+
+        <div class="ibox-title">
+            <h5>Politique de confidentialité</h5>
+        </div>
+        <div class="ibox-content">
+
+                <h3>Collecte des renseignements personnels</h3>
+                <p>
+                    Nous collectons les renseignements suivants uniquement lorsque nécessaire :
+                </p>
+                <ul>
+                    <li>Nom</li>
+                    <li>Prénom</li>
+                    <li>Adresse postale</li>
+                    <li>Code postal</li>
+                    <li>Adresse électronique</li>
+                    <li>Numéro de téléphone / télécopieur</li>
+                    <li>Scolarité / Formation</li>
+                    <li>Profession</li>
+                </ul>
+
+                <p>
+                    Les renseignements personnels que nous collectons ne seront jamais partagés.
+                    Les renseignements personnels que nous collectons sont recueillis au travers de formulaires et gr&acirc;ce à
+                    l'interactivité établie entre vous et notre site Web.
+                    Nous utilisons également, comme indiqué dans la section suivante, des fichiers témoins et/ou journaux
+                    pour réunir des informations vous concernant.
+                </p><hr/>
+                <h3>Formulaires&nbsp; et interactivité:</h3>
+                <p>
+                    Vos renseignements personnels sont collectés par le biais de formulaire, à savoir :
+                </p>
+                <ul>
+                    <li>Formulaire d'inscription au site Web</li>
+                    <li>Formulaire de commande</li>
+                </ul>
+                <p>
+                    Nous utilisons les renseignements ainsi collectés pour les finalités suivantes :
+                </p>
+                <ul>
+                    <li>Suivi de la commande</li>
+                    <li>Statistiques anonymes</li>
+                    <li>Contact</li>
+                    </li>
+                </ul>
+                <p>
+                <hr/>
+                <h3>Fichiers journaux et témoins </h3>
+                <p>
+                    Nous recueillons certaines informations par le biais de fichiers journaux (log file) et de fichiers témoins (cookies). Il s'agit principalement des informations suivantes :
+                </p>
+                <ul>
+                    <li>Adresse IP</li>
+                    <li>Pages visitées et requ&ecirc;tes</li>
+                    <li>Erreurs générées</li>
+                </ul>
+
+                <br />
+                <p>
+                    Le recours à de tels fichiers nous permet :
+                </p>
+                <ul >
+                    <li>Amélioration du service et accueil personnalisé</li>
+                    <li>Suivi de commande</li>
+                </ul><hr/>
+                <h3>Droit d'opposition et de retrait</h3>
+                <p>
+                    Nous nous engageons à vous offrir un droit d'opposition et de retrait quant à vos renseignements personnels.<br />
+                    Le droit d'opposition s'entend comme étant la possiblité offerte aux internautes de refuser que leurs renseignements
+                    personnels soient utilisées à certaines fins mentionnées lors de la collecte.<br />
+                </p>
+                <p>
+                    Le droit de retrait s'entend comme étant la possiblité offerte aux internautes de demander à ce que leurs
+                    renseignements personnels ne figurent plus, par exemple, dans une liste de diffusion.<br />
+                </p>
+                <p>
+                    Pour pouvoir exercer ces droits, vous pouvez : <br />
+                    Code postal : 9 rue Duboys des Sauzais, Corps-Nuds 35150<br />	Courriel : hugo.lehoux@gmail.com<br />	Téléphone : 0678445569<br />	Section du site web : http://agricultures-du-monde.com/<br />	</p><hr/>
+                <h3>Droit d'accès</h3>
+                <p>
+                    Nous nous engageons à reconna&icirc;tre un droit d'accès et de rectification aux personnes
+                    concernées désireuses de consulter, modifier, voire radier les informations les concernant.<br />
+
+
+                    L'exercice de ce droit se fera :<br />
+                    Code postal : 9 rue Duboys des Sauzais, Corps-Nuds 35150<br />	Courriel : hugo.lehoux@gmail.com<br />	Téléphone : 0678445569<br />	Section du site web : http://agricultures-du-monde.com/<br />	</p><hr/>
+                <h3>Sécurité</h3>
+                <p>
+
+                    Les renseignements personnels que nous collectons sont conservés
+                    dans un environnement sécurisé. Les personnes travaillant pour ce projet sont tenues de respecter la confidentialité de vos informations.<br />
+                    Pour assurer la sécurité de vos renseignements personnels, nous avons recours aux mesures suivantes :
+                </p>
+                <ul>
+                    <li>Cryptage des mots de passe</li>
+                    <li>Protocole SSL (Secure Sockets Layer)</li>
+                    <li>Gestion des accès - personne autorisée</li>
+                    <li>Gestion des accès - personne concernée</li>
+                    <li>Sauvegarde informatique</li>
+                    <li>Identifiant / mot de passe</li>
+                    <li>Pare-feu (Firewalls)</li>
+                </ul>
+
+                <p>
+                    Nous nous engageons à maintenir un haut degré de confidentialité en intégrant les dernières innovations technologiques permettant d'assurer
+                    la confidentialité de vos transactions. Toutefois, comme aucun mécanisme n'offre une sécurité maximale, une part de risque est toujours présente
+                    lorsque l'on utilise Internet pour transmettre des renseignements personnels.
+                </p><hr/>
+                <h3>Législation</h3>
+                <p>
+                    Nous nous engageons à respecter les dispositions législatives énoncées dans la Législation française
+                </p>
+            <br/>
+            <br/>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block footerclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du footerclass : "footer" "footer fixed" #}
+
+{% block plugins %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block extrascripts %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

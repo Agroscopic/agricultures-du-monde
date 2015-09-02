@@ -38,7 +38,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ['AppBundle']
+    bundles:        ['AppBundle','FOSUserBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -78,9 +78,9 @@ fos_user:
             enabled: true
             from_email:
                 address:        registration@agroscopic.org
-                sender_name:    Agroscopic Registration
+                sender_name:    Atlas des Agricultures du Monde
     resetting:
         email:
             from_email:
-                address:        resetting@agroscopic.org
-                sender_name:    Agroscopic Resetting
+                address:        resetting-password@agroscopic.org
+                sender_name:    Atlas des Agricultures du Monde
