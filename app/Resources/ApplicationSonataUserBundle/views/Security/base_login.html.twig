@@ -1,16 +1,7 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
 
 {% extends "SonataUserBundle::layout_simple.html.twig" %}
-
+{% block title %}{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}
+{% endblock title %}
 {% block pagecontent %}
 <h2 style="text-align: center;margin-top: 5%">Atlas des Agricultures du Monde</h2>
     <hr/>
@@ -27,10 +18,13 @@ file that was distributed with this source code.
                  <form action="{{ path("fos_user_security_check") }}" method="post" class="m-t" role="form">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="username" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" name="_username" value="{{ last_username }}" required="required"/>
+                            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+
+                            <input type="text" class="form-control" id="username"  name="_username" value="{{ last_username }}" required="required"/>
                         </div>
                         <div class="form-group control-group">
-                            <input type="password" class="form-control" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" id="password" name="_password" required="required"/>
+                            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                            <input type="password" class="form-control" id="password" name="_password" required="required"/>
                         </div>
 
                         <div class="form-group" style="text-align: left;">

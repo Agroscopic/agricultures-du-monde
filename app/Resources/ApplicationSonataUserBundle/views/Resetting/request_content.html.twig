@@ -1,0 +1,22 @@
+<h2 style="text-align: center;margin-top: 5%">Atlas des Agricultures du Monde</h2>
+<hr/>
+<div class="col-lg-4 col-lg-offset-4">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</h5>
+            </div>
+        <div class="ibox-content">
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <div class="form-group">
+        {% if invalid_username is defined %}
+            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+        {% endif %}
+        <input type="text" id="username" name="username" class="form-control m-b" required="required" placeholder="{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary block full-width m-b" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+</form>
+    </div>
+    </div>
+</div>

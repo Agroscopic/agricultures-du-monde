@@ -1,11 +1,20 @@
-{% extends "AppBundle::Base.html.twig" %}
-
+{# Basic Layout | http://webapplayers.com/inspinia_admin-v2.1/dashboard_4_1.html #}
+{% extends "AppBundle::NoTopNavLayout.html.twig" %}
 
 {% block title %}
+
 {% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
+    {% stylesheets output="assets/css/compiled/fosuserbundlelayout.css" filter="cssrewrite"
+    'bundles/app/css/bootstrap.min.css'
+    'bundles/app/font-awesome/css/font-awesome.css'
+    'bundles/app/css/inspinia.css'
+    'bundles/app/css/animate.css'
+    'bundles/app/css/agroscopic.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
 {% endblock %}
 
 {% block extraheadcontent %}
@@ -33,7 +42,7 @@
 {% block navbarclass %}
     {{ parent() }}
 {% endblock %}
-{# "navbar navbar-static-top" ou "navbar-fixed-top" si body class = fixed-nav #}
+{# navbar-fixed-top si body class = fixed-nav #}
 
 {% block topnav %}
     {{ parent() }}
@@ -44,34 +53,20 @@
 {% endblock %}
 
 {% block pageheading %}
-    <div id="page-heading" class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-                <h2>{% block sonata_profile_title %}{% trans from 'SonataUserBundle' %}sonata_profile_title{% endtrans %}{% endblock %}
-                </h2>
-        </div>
-        <div class="col-lg-2">
-        </div>
-    </div>
+{% endblock %}
+
+{% block breadcrumb %}
 {% endblock %}
 
 {% block wrappercontentclass %}
-    "wrapper wrapper-content"
 {% endblock %}
-{# Options du pagewrapperclass : "wrapper wrapper-content" "wrapper wrapper-content animated fadeInRight" voire "wrapper wrapper-content animated fadeInRight article" pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options) #}
+{# Options du pagewrapperclass : "wrapper wrapper-content" "wrapper wrapper-content animated fadeInRight" voire "wrapper wrapper-content animated fadeInRight article"pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options) #}
 
 {% block pagecontent %}
-
-
-        {% block sonata_profile_menu %}
-            {{ sonata_block_render({'type': 'sonata.user.block.menu'}, {'current_uri': app.request.requestUri}) }}
-            {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
-        {% endblock %}
-
-        {% block sonata_profile_content '' %}
-        {% endblock %}
+{% endblock %}
 
 {% block footerclass %}
-    {{ parent() }}
+    {{ parent() }} style="display:none;"
 {% endblock %}
 {# Options du footerclass : "footer" "footer fixed" #}
 
@@ -80,17 +75,18 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+    {% javascripts
+    '@AppBundle/Resources/public/js/jquery-2.1.1.js'
+    '@AppBundle/Resources/public/js/bootstrap.min.js'
+    '@AppBundle/Resources/public/js/inspinia.js'
+    '@AppBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
+    output='assets/js/compiled/fosuserbundlelayout.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 {% block extrascripts %}
-    <script type="text/javascript">
-        $('body.canvas-menu .sidebar-collapse').slimScroll({
-            height: '100%',
-            railOpacity: 0.9
-        });
-
-
-    </script>
 {% endblock %}
+
 

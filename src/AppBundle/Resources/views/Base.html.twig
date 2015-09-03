@@ -45,13 +45,13 @@
             {# Ajouter <a class="close-canvas-menu"><i class="fa fa-times"></i></a> si bodyclass=canvas-menu #}
             <ul class="nav" id="side-top-menu">
                 {# Cet include correspond au carré avec le profil de l'utilisateur #}
-                {% include 'AppBundle:Commons:navbar-profile.html.twig' %}
+                {% include 'AppBundle:Commons:nav-header.html.twig' %}
             </ul>
             <ul class="nav" id="side-menu">
 
                 {% block menus %}
                     {# Cet include correspond aux menus de gauche #}
-                    {% include 'ADMCoreBundle:Common:navbar-menus.html.twig' %}
+                    {% include 'AppBundle:Commons:nav-side.html.twig' %}
                 {% endblock %}
             </ul>
         </div>
@@ -69,7 +69,7 @@
                 </div>
                 {% block topnav %}
                     {# Cet include correspond aux menus du haut #}
-                    {% include 'ADMCoreBundle:Common:topnav.html.twig' %}
+                    {% include 'AppBundle:Commons:nav-top.html.twig' %}
                 {% endblock %}
             </nav>
         </div>
@@ -117,20 +117,7 @@
             </div>
         </div>
         {# Fin Page Content #}
-        <div class="row">
-            <div class={% block footerclass %}"footer"{% endblock %} style="z-index: 9998;">
-                {# Options du footerclass :
-                   "footer"
-                   "footer fixed"
-                   #}
-                <div class="pull-right">
-                    Atlas Numérique des Agricultures du Monde <strong>{{ licence }}</strong>.
-                </div>
-                <div>
-                    <strong>Copyright</strong> {{ owner }} &copy; 2014-{{ "now" | date("Y")}}
-                </div>
-            </div>
-        </div>
+
 
     </div> {# end page wrapper #}
 
@@ -144,25 +131,15 @@
 
 {% block javascripts %}
     {% javascripts
-    '@ADMCoreBundle/Resources/public/js/jquery-2.1.1.js'
-    '@ADMCoreBundle/Resources/public/js/bootstrap.min.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/pace/pace.min.js'
-    '@ADMCoreBundle/Resources/public/js/inspinia.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/toastr/toastr.min.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/flot/jquery.flot.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/flot/jquery.flot.tooltip.min.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/flot/jquery.flot.spline.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/flot/jquery.flot.resize.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/flot/jquery.flot.pie.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/peity/jquery.peity.min.js'
-    '@ADMCoreBundle/Resources/public/js/demo/peity-demo.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/sparkline/jquery.sparkline.min.js'
-    '@ADMCoreBundle/Resources/public/js/demo/sparkline-demo.js'
-    '@ADMCoreBundle/Resources/public/js/plugins/chartJs/Chart.min.js'
-    output='js/compiled/base.js'
+    '@AppBundle/Resources/public/js/jquery-2.1.1.js'
+    '@AppBundle/Resources/public/js/bootstrap.min.js'
+    '@AppBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
+    '@AppBundle/Resources/public/js/plugins/pace/pace.min.js'
+    '@AppBundle/Resources/public/js/inspinia.js'
+    '@AppBundle/Resources/public/js/plugins/toastr/toastr.min.js'
+    '@AppBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
+    '@AppBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
+    output='assets/js/compiled/base.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
