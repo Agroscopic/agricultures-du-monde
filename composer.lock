@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe8be242512c0dd5f2ee681a58739410",
+    "hash": "23382696a6cbf95e5c037a404142c6f7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -962,12 +962,12 @@
             "version": "v2.4.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "url": "git@github.com:Atlantic18/DoctrineExtensions.git",
                 "reference": "5d330411e27ab0ced67e1e5383ccae975c23c17d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/5d330411e27ab0ced67e1e5383ccae975c23c17d",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/211af4ba5201c422ee450be82c7044f090c90e39",
                 "reference": "5d330411e27ab0ced67e1e5383ccae975c23c17d",
                 "shasum": ""
             },
@@ -2837,6 +2837,56 @@
                 "framework"
             ],
             "time": "2015-07-31 13:24:45"
+        },
+        {
+            "name": "tilleuls/acl-sonata-admin-extension-bundle",
+            "version": "1.1.0",
+            "target-dir": "CoopTilleuls/Bundle/AclSonataAdminExtensionBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coopTilleuls/CoopTilleulsAclSonataAdminExtensionBundle.git",
+                "reference": "ba691f25891cf13d31540ec94606705044709fa9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coopTilleuls/CoopTilleulsAclSonataAdminExtensionBundle/zipball/ba691f25891cf13d31540ec94606705044709fa9",
+                "reference": "ba691f25891cf13d31540ec94606705044709fa9",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.2",
+                "sonata-project/admin-bundle": "~2.2,>=2.2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CoopTilleuls\\Bundle\\AclSonataAdminExtensionBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Dunglas",
+                    "email": "kevin@les-tilleuls.coop",
+                    "homepage": "http://dunglas.fr"
+                }
+            ],
+            "description": "ACL list filtering for SonataAdmin",
+            "homepage": "http://les-tilleuls.coop",
+            "keywords": [
+                "acl",
+                "admin",
+                "sonata"
+            ],
+            "time": "2014-12-11 17:54:23"
         },
         {
             "name": "twig/extensions",
