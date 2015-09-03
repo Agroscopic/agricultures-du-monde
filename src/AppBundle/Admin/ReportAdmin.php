@@ -13,8 +13,22 @@ class ReportAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text', array('label' => 'Titre'))
-            ->add('author', 'entity', array('label' => 'Auteur','class' => 'AppBundle\Entity\User'))
-            ->add('description','text', array('label' => 'Résumé'))
+            ->add('description','ckeditor', array(
+                'config' => array(
+                    'toolbar' => array(
+                        array(
+                            'name'  => 'document',
+                            'items' => array('Source', '-', 'Save', 'NewPage', 'DocProps', 'Preview', 'Print', '-', 'Templates'),
+                        ),
+                        '/',
+                        array(
+                            'name'  => 'basicstyles',
+                            'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
+                        ),
+                    ),
+                    'uiColor' => '#ffffff',
+                ),
+            ))
             ->add('body','text', array('label' => 'Contenu du rapport')) //if no type is specified, SonataAdminBundle tries to guess it
         ;
     }

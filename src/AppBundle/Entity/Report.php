@@ -48,12 +48,6 @@ class Report
      */
     private $inLanguage;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
 
     /**
      * @var string
@@ -141,29 +135,7 @@ class Report
     {
         return $this->inLanguage;
     }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     * @return Report
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+    
 
     /**
      * Set body
