@@ -135,7 +135,7 @@ class Report
     {
         return $this->inLanguage;
     }
-    
+
 
     /**
      * Set body

@@ -141,3 +141,10 @@ sonata_admin:
 sonata_user:
     security_acl: true
     manager_type: orm
+
+ivory_ck_editor:
+    input_sync: true
+    configs:
+        custom_full_config:
+            toolbar:                [ ["Undo","Redo"],['Format'],[ "Bold",  "Italic","Underline","Strike","Subscript","Superscript"], ['Cut','Copy','Paste','PasteFromWord'],['NumberedList','BulletedList','-','Blockquote'],['Link','Unlink','Table','Image'],[ "Maximize" ] ]
+            uiColor:                "#ffffff"
