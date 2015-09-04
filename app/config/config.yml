@@ -163,7 +163,7 @@ sonata_media:
 
     cdn:
         server:
-            path: /uploads/media # http://media.sonata-project.org/
+            path: %kernel.root_dir%/../web/uploads/media # http://media.sonata-project.org/
 
     filesystem:
         local:
@@ -189,6 +189,10 @@ ivory_ck_editor:
             filebrowserImageUploadRoute: admin_sonata_media_media_upload
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
+    plugins:
+        uploadimage:
+            path:     "/bundles/"
+            filename: "plugin.js"
 
 sonata_intl:
     timezone:

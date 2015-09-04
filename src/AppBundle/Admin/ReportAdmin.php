@@ -14,11 +14,15 @@ class ReportAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Titre'))
             ->add('description','ckeditor', array(
-                'config_name' => 'custom_full_config',
+                'plugins' => array(
+                    'uploadimage' => array(
+                        'path'     => '/bundles/app/js/plugins/ckeeditor/upload/',
+                        'filename' => 'plugin.js',
+                    ),
+                ),
             ))
-            ->add('body','ckeditor', array(
-                'config_name' => 'custom_full_config',
-            ))
+            ->add('body','ckeditor')
+            ->add('inLanguage','text')
         ;
     }
 
