@@ -16,7 +16,9 @@ class ReportAdmin extends Admin
             ->add('description','ckeditor', array(
                 'config_name' => 'custom_full_config',
             ))
-            ->add('body','text', array('label' => 'Contenu du rapport')) //if no type is specified, SonataAdminBundle tries to guess it
+            ->add('body','ckeditor', array(
+                'config_name' => 'custom_full_config',
+            ))
         ;
     }
 

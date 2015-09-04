@@ -48,6 +48,9 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
+# Sonata Classification bundle
+sonata_classification:
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -148,3 +151,10 @@ ivory_ck_editor:
         custom_full_config:
             toolbar:                [ ["Undo","Redo"],['Format'],[ "Bold",  "Italic","Underline","Strike","Subscript","Superscript"], ['Cut','Copy','Paste','PasteFromWord'],['NumberedList','BulletedList','-','Blockquote'],['Link','Unlink','Table','Image'],[ "Maximize" ] ]
             uiColor:                "#ffffff"
+
+sonata_intl:
+    timezone:
+        detectors:
+            - sonata.intl.timezone_detector.user
+            - sonata.intl.timezone_detector.locale
+        default: Europe/Paris

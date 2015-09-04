@@ -26,7 +26,9 @@
         "sonata-project/doctrine-orm-admin-bundle": "^2.3",
         "sonata-project/user-bundle": "^2.2",
         "knplabs/knp-menu-bundle": "1.1.x-dev",
-        "egeloen/ckeditor-bundle": "^3.0"
+        "egeloen/ckeditor-bundle": "^3.0",
+        "sonata-project/classification-bundle": "^2.2",
+        "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
