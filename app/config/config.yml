@@ -172,10 +172,23 @@ sonata_media:
 
 ivory_ck_editor:
     input_sync: true
+    default_config: custom_full_config
     configs:
         custom_full_config:
             toolbar:                [ ["Undo","Redo"],['Format'],[ "Bold",  "Italic","Underline","Strike","Subscript","Superscript"], ['Cut','Copy','Paste','PasteFromWord'],['NumberedList','BulletedList','-','Blockquote'],['Link','Unlink','Table','Image'],[ "Maximize" ] ]
             uiColor:                "#ffffff"
+            filebrowserBrowseRoute: admin_sonata_media_media_browser
+            filebrowserImageBrowseRoute: admin_sonata_media_media_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_sonata_media_media_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_sonata_media_media_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
 
 sonata_intl:
     timezone:

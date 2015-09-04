@@ -27,7 +27,6 @@ class ReportAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('author')
         ;
     }
 
@@ -36,7 +35,6 @@ class ReportAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('author')
         ;
     }
 }

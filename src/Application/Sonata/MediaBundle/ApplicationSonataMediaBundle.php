@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * References :
  *   bundles : http://symfony.com/doc/current/book/bundles.html
  *
- * @author <yourname> <youremail>
+ * @author <Agroscopic> <youremail>
  */
 class ApplicationSonataMediaBundle extends Bundle
 {
@@ -27,6 +27,6 @@ class ApplicationSonataMediaBundle extends Bundle
      */
     public function getParent()
     {
-        return 'SonataMediaBundle';
+        return 'CoopTilleulsCKEditorSonataMediaBundle';
     }
 }
