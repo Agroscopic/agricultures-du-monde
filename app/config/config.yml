@@ -54,7 +54,7 @@ sonata_classification:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
+        driver:   "%database_driver%"
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"
@@ -63,6 +63,9 @@ doctrine:
         charset:  UTF8
         types:
             json: Sonata\Doctrine\Types\JsonType
+        mapping_types:
+             enum: string
+
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
@@ -163,7 +166,7 @@ sonata_media:
 
     cdn:
         server:
-            path: %kernel.root_dir%/../web/uploads/media # http://media.sonata-project.org/
+            path: /uploads/media # http://media.sonata-project.org/
 
     filesystem:
         local:

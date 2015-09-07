@@ -80,26 +80,6 @@ class Report
      */
     private $longitude;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateCreated", type="datetime")
-     */
-    private $dateCreated;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datePublished", type="datetime")
-     */
-    private $datePublished;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateModified", type="datetime")
-     */
-    private $dateModified;
     
 
 
@@ -278,72 +258,4 @@ class Report
         return $this->longitude;
     }
 
-    /**
-     * Set dateCreated
-     *
-     * @param \DateTime $dateCreated
-     * @return Report
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreated
-     *
-     * @return \DateTime 
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
-    }
-
-    /**
-     * Set datePublished
-     *
-     * @param \DateTime $datePublished
-     * @return Report
-     */
-    public function setDatePublished($datePublished)
-    {
-        $this->datePublished = $datePublished;
-
-        return $this;
-    }
-
-    /**
-     * Get datePublished
-     *
-     * @return \DateTime 
-     */
-    public function getDatePublished()
-    {
-        return $this->datePublished;
-    }
-
-    /**
-     * Set dateModified
-     *
-     * @param \DateTime $dateModified
-     * @return Report
-     */
-    public function setDateModified($dateModified)
-    {
-        $this->dateModified = $dateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get dateModified
-     *
-     * @return \DateTime 
-     */
-    public function getDateModified()
-    {
-        return $this->dateModified;
-    }
 }
