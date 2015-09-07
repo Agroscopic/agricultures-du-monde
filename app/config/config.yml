@@ -147,7 +147,12 @@ sonata_admin:
 sonata_user:
     security_acl: true
     manager_type: orm
-
+    profile:
+        register:
+            confirm:
+                redirect:
+                    route: 'sonata_user_profile_edit'
+                    route_parameters: ~
 sonata_media:
     db_driver: doctrine_orm
     default_context: default # you need to set a context

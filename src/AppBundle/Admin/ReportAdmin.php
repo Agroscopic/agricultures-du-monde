@@ -13,6 +13,7 @@ class ReportAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text', array('label' => 'Titre'))
+            ->add('authors')
             ->add('description','ckeditor', array(
                 'plugins' => array(
                     'uploadimage' => array(
@@ -33,6 +34,7 @@ class ReportAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('authors')
             ->add('slug')
         ;
     }
@@ -43,6 +45,7 @@ class ReportAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
+            ->add('authors')
 
         ;
     }

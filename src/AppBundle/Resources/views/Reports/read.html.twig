@@ -161,7 +161,14 @@
                         <div id="reportName">
                             {{ report.name | upper }}
                         </div>
-                        {# for author in report.authors %}{{ author.label }}{% if not loop.last %}, {% endif %}{% endfor #}Damien Joubert, Gaëtan Beuscart
+                        {%  for author in report.authors %}
+                            {% if author.FullName | length > 3 %}
+                                {{ author.FullName }}
+                            {% else %}
+                                {{ author.username | capitalize }}
+                            {% endif %}
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
                         | 2015{# report.dateCreated | date('Y') #}<br/>
                     </div>
 

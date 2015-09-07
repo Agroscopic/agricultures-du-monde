@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Report
@@ -14,12 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Report
 {
-    public function __construct()
-    {
-        $this->dateCreated = new \Datetime();
-        $this->datePublished = new \Datetime();
-        $this->dateModified = new \Datetime();
-    }
 
     /**
      * @var integer
@@ -43,6 +36,11 @@ class Report
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="reports")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $authors;
 
     /**
      * @var string
@@ -258,4 +256,49 @@ class Report
         return $this->longitude;
     }
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add authors
+     *
+     * @param \Application\Sonata\UserBundle\Entity\User $author
+     * @return Report
+     */
+    public function addAuthor(\Application\Sonata\UserBundle\Entity\User $author)
+    {
+        $this->authors[] = $author;
+
+        $author->addReport($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove authors
+     *
+     * @param \Application\Sonata\UserBundle\Entity\User $author
+     */
+    public function removeAuthor(\Application\Sonata\UserBundle\Entity\User $author)
+    {
+        $this->authors->removeElement($author);
+
+        $author->removeReport($this);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
 }
