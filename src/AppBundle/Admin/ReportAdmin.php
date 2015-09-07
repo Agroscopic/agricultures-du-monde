@@ -14,6 +14,7 @@ class ReportAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Titre'))
             ->add('authors')
+            ->add('tags')
             ->add('description','ckeditor', array(
                 'plugins' => array(
                     'uploadimage' => array(

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+
 /**
  * Report
  *
@@ -13,6 +14,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Report
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
 
     /**
      * @var integer
@@ -41,6 +52,12 @@ class Report
      * @ORM\JoinColumn(nullable=false)
      */
     private $authors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", inversedBy="reports")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tags;
 
     /**
      * @var string
@@ -78,13 +95,13 @@ class Report
      */
     private $longitude;
 
-    
+
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,7 +124,7 @@ class Report
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -130,7 +147,7 @@ class Report
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -153,7 +170,7 @@ class Report
     /**
      * Get inLanguage
      *
-     * @return string 
+     * @return string
      */
     public function getInLanguage()
     {
@@ -177,7 +194,7 @@ class Report
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -201,7 +218,7 @@ class Report
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -226,7 +243,7 @@ class Report
     /**
      * Get latitude
      *
-     * @return float 
+     * @return float
      */
     public function getLatitude()
     {
@@ -249,21 +266,13 @@ class Report
     /**
      * Get longitude
      *
-     * @return float 
+     * @return float
      */
     public function getLongitude()
     {
         return $this->longitude;
     }
 
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add authors
@@ -295,10 +304,48 @@ class Report
     /**
      * Get authors
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAuthors()
     {
         return $this->authors;
+    }
+
+
+    /**
+     * Add Tag
+     *
+     * @param \Application\Sonata\ClassificationBundle\Entity\Tag $tag
+     * @return Report
+     */
+    public function addTag(\Application\Sonata\ClassificationBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        $tag->addReport($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove Tag
+     *
+     * @param \Application\Sonata\ClassificationBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Application\Sonata\ClassificationBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+
+        $tag->removeReport($this);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

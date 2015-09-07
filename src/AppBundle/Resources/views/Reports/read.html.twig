@@ -90,7 +90,6 @@
 {# Ajouter <a class="close-canvas-menu"><i class="fa fa-times"></i></a> si bodyclass=canvas-menu #}
 
 {% block menus %}
-
     <li id="my-nav" class="active"><a href="#"><i class="fa fa-list-ul"></i> <span
                     class="nav-label">SOMMAIRE</span><span
                     class="fa arrow"></span></a>
@@ -172,26 +171,17 @@
                         | 2015{# report.dateCreated | date('Y') #}<br/>
                     </div>
 
-                    {# LES MOTS-CLES
-                    {% if report.keywords  is not empty %}
+                    {# LES MOTS-CLES #}
+                    {% if report.tags  is not empty %}
                         <label>Mots-clés</label>
                         <div>
-                            {% for keyword in report.keywords %}
+                            {% for tag in report.tags %}
                                 <a class="btn btn-white btn-xs"
-                                   href="{{ path('adm_list_report_by_keyword',{'label': keyword.label}) }}"
-                                   role="button"><i class="fa fa-tag"></i> {{ keyword.name }}</a>
+                                   href="{#path('adm_list_report_by_keyword',{'label': keyword.label}) #} "
+                                   role="button"><i class="fa fa-tag"></i> {{ tag.name }}</a>
                             {% endfor %}
                         </div>
-                    {% endif %}#}
-                    <label>Mots-clés</label>
-                    <div>
-                    <a class="btn btn-white btn-xs"
-                       href="#"
-                       role="button"><i class="fa fa-tag"></i> Dagnostic Agraire</a>
-                        <a class="btn btn-white btn-xs"
-                                                                                        href="#"
-                                                                                        role="button"><i class="fa fa-tag"></i> Accaparement des terres</a>
-                    </div>
+                    {% endif %}
                     <div class="hr-line-dashed"></div>
 
                     {# LE RESUME DU RAPPORT #}
