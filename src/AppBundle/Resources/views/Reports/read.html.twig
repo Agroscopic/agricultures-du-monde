@@ -1,0 +1,369 @@
+{# OffCanvas Layout | http://webapplayers.com/inspinia_admin-v2.1/off_canvas_menu.html #}
+{% extends "AppBundle::OffCanvasLayout.html.twig" %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block extraheadcontent %}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/sweetalert/1.0.1/sweetalert.css">
+
+    <style>
+        .article h1 {
+            font-size: 25px;
+        }
+
+        #reportName {
+            font-size: 40px;
+            font-weight: 700;
+            color: #2F4050;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 15px;
+            padding-bottom: 15px;
+
+        }
+
+        .static-map {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ibox-content {
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+        #tocList
+        > li > ul > li > a {
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        .ibox-content p, .ibox-content ul, #articleBody p, #articleBody ul {
+            font-size: 15px;
+            margin-left: 10%;
+            margin-right: 5%;
+            margin-bottom: 1.3em;
+            text-align: justify;
+            text-indent: 5%;
+            line-height: 26px;
+        }
+
+        #articleBody h1 {
+        }
+
+        #articleBody h2 {
+            margin-left: 5%;
+        }
+
+        #articleBody h3 {
+            margin-left: 10%;
+        }
+
+        #articleBody h4 {
+            margin-left: 10%;
+        }
+
+        #articleBody h5 {
+            margin-left: 10%;
+        }
+
+
+    </style>
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block bodyclass %}
+    "skin-3 fixed-sidebar"
+{% endblock %}
+{# Options du bodyclass : "skin-1"  "skin-2" "skin-3" "mini-navbar" "fixed-sidebar" : dans ce cas ne pas oublier d'ajouter le script slimScroll qui se trouve dans js/inspinia.js file et décommenter le Fixed Sidebar comment and uncomment function et ajouter <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>"fixed-nav" : dans ce cas mettre navbar-fixed-top si body class = fixed-nav dans <nav>   En mettant mini-navbar ET fixed-sidebar ET fixed-nav, on ne voit plus du tout la barre de navigation de gauche et la barre du haut devient fixe (pour Rapports de stage peut-être), "canvas-menu"pour le OffCanvasLayout #}
+
+{% block closeNavbar %}
+{% endblock %}
+{# Ajouter <a class="close-canvas-menu"><i class="fa fa-times"></i></a> si bodyclass=canvas-menu #}
+
+{% block menus %}
+
+    <li id="my-nav" class="active"><a href="#"><i class="fa fa-list-ul"></i> <span
+                    class="nav-label">SOMMAIRE</span><span
+                    class="fa arrow"></span></a>
+        <ul id="tocList" class="nav nav-second-level ">
+        </ul>
+    </li>{# end-col #}
+
+{% endblock %}
+
+{% block pagewrapperclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du pagewrapperclass : "gray-bg" "gray-bg dashboard-1" mais ça a pas l'air de servir grand chose "gray-bg sidebar-content" ajoute une jolie barre sur la droite  (peut-être pour mettre le sommaire des rapports). Par contre pas toujours terrible pour les téléphones car elle est prioritaireIl faut créer un <div class="sidebard-panel">. Voir exemple #}
+
+{% block navbarclass %}
+    {{ parent() }}
+{% endblock %}
+{# "navbar navbar-static-top" ou "navbar-fixed-top" si body class = fixed-nav #}
+
+{% block topnav %}
+    {{ parent() }}
+{% endblock %}
+
+{# On met soit le block dashboardheader ou pageheading mais pas les deux, on peut aussi les enlever tous les deux. Je mets du contenu pour l'exemple #}
+{% block dashboardheader %}
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <h2>{{ report.name }}</h2>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ path('homepage') }}">Accueil</a>
+        </li>
+        <li>
+            <a href="#">Rapports</a>
+        </li>
+        <li class="active">
+            <strong>Diagnostic Agraire</strong>
+        </li>
+    </ol>
+{% endblock %}
+
+{% block wrappercontentclass %}
+    "wrapper wrapper-content animated fadeInRight article"
+{% endblock %}
+{# Options du pagewrapperclass : "wrapper wrapper-content" "wrapper wrapper-content animated fadeInRight" voire "wrapper wrapper-content animated fadeInRight article" pour faire apparaître le contenu de façon un peu dynamique (voir animate.css pour toutes les options) #}
+
+{% block pagecontent %}
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    {# BOUTON EDITION, BOUTON PDF #}
+                    <div class="pull-right">
+                        <a class="btn btn-white btn-xs"
+                           href="{#path('adm_report_update',{'slug': report.slug}) #} " role="button"><i
+                                    class="fa fa-pencil"></i> Editer</a>
+
+                        <a class="btn btn-xs btn-outline btn-danger" id="downloadPDF"
+                           href="{# path('adm_report_read',{'slug': report.slug, '_format':'pdf'}) #}"
+                           role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                    </div>
+
+                    {# TITRE DU RAPPORT #}
+                    <div class="text-center article-title">
+                        <div id="reportName">
+                            {{ report.name | upper }}
+                        </div>
+                        {# for author in report.authors %}{{ author.label }}{% if not loop.last %}, {% endif %}{% endfor #}Damien Joubert, Gaëtan Beuscart
+                        | 2015{# report.dateCreated | date('Y') #}<br/>
+                    </div>
+
+                    {# LES MOTS-CLES
+                    {% if report.keywords  is not empty %}
+                        <label>Mots-clés</label>
+                        <div>
+                            {% for keyword in report.keywords %}
+                                <a class="btn btn-white btn-xs"
+                                   href="{{ path('adm_list_report_by_keyword',{'label': keyword.label}) }}"
+                                   role="button"><i class="fa fa-tag"></i> {{ keyword.name }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}#}
+                    <label>Mots-clés</label>
+                    <div>
+                    <a class="btn btn-white btn-xs"
+                       href="#"
+                       role="button"><i class="fa fa-tag"></i> Dagnostic Agraire</a>
+                        <a class="btn btn-white btn-xs"
+                                                                                        href="#"
+                                                                                        role="button"><i class="fa fa-tag"></i> Accaparement des terres</a>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    {# LE RESUME DU RAPPORT #}
+                    {% if report.description  is not empty %}
+                        <h1>Résumé</h1>
+                        {{ report.description | raw }}
+
+                    {% endif %}
+
+                </div> {# end-ibox-content #}
+            </div> {# end-ibox #}
+
+            {# LES CARTES STATIQUES
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row" style="padding: none;margin: none;">
+                        <div class="col-md-4">
+                            <img class="static-map" id='static-map'>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="static-map" id='static-map-2'>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="static-map" id='static-map-3'>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+#}
+
+            {# LE CONTENU DU RAPPORT #}
+
+            <div class="ibox">
+                <div class="ibox-content" id="articleBody">
+                    {{ report.body | raw }}
+                </div>
+            </div> {# end-ibox #}
+
+        </div> {# end-col-lg-10 col-lg-offset-1 #}
+    </div> {# end-row #}
+{% endblock %}
+
+{% block footerclass %}
+    {{ parent() }}
+{% endblock %}
+{# Options du footerclass : "footer" "footer fixed" #}
+
+{% block plugins %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script src="http://cdn.bootcss.com/sweetalert/1.0.1/sweetalert.min.js"></script>
+{% endblock %}
+
+{% block extrascripts %}
+    <script type="text/javascript">
+        $('body.canvas-menu .sidebar-collapse').slimScroll({
+            height: '100%',
+            railOpacity: 0.9
+        });
+    </script>
+
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoiaHVnb2xlaG91eCIsImEiOiItOHl6Sm5jIn0.12l_k0K_Z28UE-Jc0kDgpw';
+        longitude = {{ report.latitude }};
+        latitude = {{ report.longitude }};
+        var data = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            latitude,
+                            longitude
+                        ]
+                    }
+                }
+            ]
+        };
+
+        // The size of the desired map.
+        var size = [600, 600];
+
+
+        document.getElementById('static-map').src =
+                'https://api.tiles.mapbox.com/v4/hugolehoux.m2a2l7dj/' +
+                'pin-l+C5E96F(' + latitude + ',' + longitude + ')' + '/' +
+                latitude + ',' + longitude + ',' +
+                3 + '/' +
+                size.join('x') + '.png' +
+                '?access_token=' + L.mapbox.accessToken;
+
+        document.getElementById('static-map-2').src =
+                'https://api.tiles.mapbox.com/v4/hugolehoux.mi8n7fe4/' +
+                'pin-l(' + latitude + ',' + longitude + ')' + '/' +
+                latitude + ',' + longitude + ',' +
+                5 + '/' +
+                size.join('x') + '.png' +
+                '?access_token=' + L.mapbox.accessToken;
+
+        document.getElementById('static-map-3').src =
+                'https://api.tiles.mapbox.com/v4/hugolehoux.n5k07l88/' +
+                'pin-l+C5E96F(' + latitude + ',' + longitude + ')' + '/' +
+                latitude + ',' + longitude + ',' +
+                7 + '/' +
+                size.join('x') + '.png' +
+                '?access_token=' + L.mapbox.accessToken;
+    </script>
+
+    <script>$(document).ready(function () {
+
+            var prevH1Item = null;
+            var prevH1List = null;
+
+            var index = 0;
+            $("#articleBody > div > h1, #articleBody > div > h2").each(function () {
+
+                //insert an anchor to jump to, from the TOC link.
+                var anchor = "<div id='" + "toc" + index + "'></div>";
+                $(this).before(anchor);
+
+
+                if ($(this).is("h1")) {
+                    var lih1 = "<li><a href='#" + "toc" + index + "'>" + $(this).text() + "</a></li>";
+                    prevH1List = $("<ul class='nav nav-third-level'></ul>");
+                    prevH1Item = $(lih1);
+                    prevH1Item.append(prevH1List);
+                    prevH1Item.appendTo("#tocList");
+                } else {
+                    var lih2 = "<li><a style='padding-top: 2px; padding-bottom: 2px;' href='#" + "toc" + index + "'>" + $(this).text() + "</a></li>";
+                    prevH1List.append(lih2);
+                }
+                index++;
+            });
+
+        });
+
+
+    </script>
+
+    <script>$(document).ready(function () {
+            $('li a').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 20
+                }, 500, 'swing');
+                return false;
+            });
+        });
+    </script>
+
+    <script>
+        $('#downloadPDF').click(function (e) {
+            e.preventDefault();
+            var link = $(this).attr('href');
+
+            swal({
+                        title: "Attention !",
+                        text: "L'utilisation des données de ce rapport doit être faite avec précaution. Décontextualiser des données peut mener à des absurdités. ",
+                        type: "warning",
+                        showCancelButton: true,
+
+                    },
+                    function () {
+
+                        window.location.href = link;
+
+                    });
+        });
+
+    </script>
+
+{% endblock %}
+

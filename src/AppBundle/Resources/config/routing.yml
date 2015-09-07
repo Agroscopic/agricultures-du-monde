@@ -1,0 +1,10 @@
+app_view_worldmap:
+    path:     /carte-mondiale
+    defaults: { _controller: AppBundle:Map:readWorlMap }
+
+app_report_read:
+    path:     /{slug}
+    defaults: { _controller: AppBundle:Report:read }
+
+
+

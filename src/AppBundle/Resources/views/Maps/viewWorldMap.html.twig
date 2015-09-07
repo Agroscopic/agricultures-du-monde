@@ -1,0 +1,470 @@
+{% extends "AppBundle:Maps:layout.html.twig" %}
+
+{% block extraheadcontent %}
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.css' rel='stylesheet' />
+
+  <style type="text/css">
+    #map{
+      width: 100%;
+      height: calc(100vh - 60px);
+    }
+  </style>
+
+  <style>
+    /*
+     * These CSS rules affect the tooltips within maps with the custom-popup
+     * class. See the full CSS for all customizable options:
+     * https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
+     */
+    .custom-popup .leaflet-popup-content-wrapper {
+      background: white;
+      color:#2E3942;
+      font-size:14px;
+      border-color:#e7eaec;
+      border-radius: 0px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 10px;
+      -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.25);
+      -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.25);
+      box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.25);
+    }
+
+    .custom-popup .leaflet-popup-header {
+      background: #edf0f1;
+      color:#2E3942;
+      font-size:14px;
+      border-color:#e7eaec;
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-top: -25px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: solid 1px #d9dcdd;
+    }
+
+    .custom-popup .leaflet-popup-header a {
+      color:#2E3942;
+      font-weight: bold;
+    }
+    .custom-popup .leaflet-popup-header a:hover {
+      color:#2E3942;
+      text-decoration: underline;
+    }
+
+    .custom-popup .leaflet-popup-tip-container {
+      width:15px;
+      height:15px;
+    }
+    .custom-popup .leaflet-popup-tip {
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid white;
+    }
+
+    .my-icon {
+      padding-top:0.1em !important;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding-top:20%;
+      line-height:1.5em;
+      min-width: 1.7em;
+      min-height: 1.7em;
+      border-radius: 100%;
+      background: hsla(357, 79%, 34%, 1);
+      box-shadow:
+      hsla(360, 100%, 100%, 0.25) 0 0 0 4px;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+
+
+    .my-icon-medium {
+      padding-top:0.2em !important;
+      font-size: 1.4em;
+      font-weight: bold;
+      line-height:1.5em;
+      min-width: 1.9em;
+      min-height: 1.9em;
+      border-radius: 100%;
+      background: hsla(357, 79%, 34%, 1);
+      box-shadow:
+      hsla(360, 100%, 100%, 0.25) 0 0 0 5px;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+
+    .leaflet-control-layers-toggle{
+      width:auto;
+      background-position:3px 50% ;
+      padding:3px;
+      padding-left:36px;
+      text-decoration:none;
+      line-height:36px;
+
+    }
+    }
+  </style>
+{% endblock %}
+
+{% block topnav %}
+  <ul class="nav navbar-top-links navbar-right">
+    <li>
+      <span class="m-r-sm text-muted welcome-message">Atlas Numérique des Agricultures du Monde</span>
+    </li>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+      <li class="dropdown">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="label label-warning">16</span>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+          <li>
+            <div class="dropdown-messages-box">
+              <a href="profile.html" class="pull-left">
+                <img alt="image" class="img-circle" src="img/a7.jpg">
+              </a>
+              <div class="media-body">
+                <small class="pull-right">46h ago</small>
+                <strong>Damien</strong>aime la page blabla. <br>
+                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+              </div>
+            </div>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <div class="dropdown-messages-box">
+              <a href="profile.html" class="pull-left">
+                <img alt="image" class="img-circle" src="img/a4.jpg">
+              </a>
+              <div class="media-body ">
+                <small class="pull-right text-navy">5h ago</small>
+                <strong>Hugo Lehoux</strong>aime la page machin. <br>
+                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+              </div>
+            </div>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <div class="dropdown-messages-box">
+              <a href="profile.html" class="pull-left">
+                <img alt="image" class="img-circle" src="http://webapplayers.com/inspinia_admin-v2.0/img/profile.jpg">
+              </a>
+              <div class="media-body ">
+                <small class="pull-right">23h ago</small>
+                <strong>Hugo Lehoux</strong>aime la page machin. <br>
+                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+              </div>
+            </div>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <div class="text-center link-block">
+              <a href="mailbox.html">
+                <i class="fa fa-envelope"></i> <strong>Lire tous les messages</strong>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+          <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+          <li>
+            <a href="mailbox.html">
+              <div>
+                <i class="fa fa-envelope fa-fw"></i> Vous avez 16 messages
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="profile.html">
+              <div>
+                <i class="fa fa-twitter fa-fw"></i> 3 Nouveaux followers
+                <span class="pull-right text-muted small">12 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="grid_options.html">
+              <div>
+                <i class="fa fa-upload fa-fw"></i> Vous n'avez pas complété votre profil
+                <span class="pull-right text-muted small">4 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <div class="text-center link-block">
+              <a href="notifications.html">
+                <strong>Voir toutes les alertes</strong>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="{{ path('fos_user_security_logout') }}">
+          <i class="fa fa-sign-out"></i> Se déconnecter
+        </a>
+      </li>
+    {% else %}
+      <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}" role="button" ><i class="fa fa-login"></i>Connexion</a>
+    {% endif %}
+    <li>
+      <a href="{# path('adm_report_create') #}">
+        <i class="fa fa-plus"></i>
+      </a>
+    </li>
+  </ul>
+
+{% endblock %}
+
+{% block pagecontent %}
+  <div class='custom-popup' id='map'></div>
+{% endblock %}
+
+{% block plugins %}
+  <div id="right-sidebar">
+    <div class="sidebar-container">
+      <ul class="nav nav-tabs navs-3">
+        <li class="active"><a data-toggle="tab" href="#tab-1">
+            Détails
+          </a></li>
+        <li><a data-toggle="tab" href="#tab-2">
+            Images
+          </a></li>
+
+        <li class=""><a data-toggle="tab" href="#tab-3">
+            <i class="fa fa-gear"></i>
+          </a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+          <div class="sidebar-title" id="sidebar-title-report">
+            <h3 id="sidebar-title-report"> Titre du rapport </h3>
+            <small id="sidebar-title-authors"> Auteurs </small>
+          </div>
+
+          <div>
+            <ul class="sidebar-list">
+              <li>
+                <a href="#">
+                  <h4>Résumé</h4>
+                  <div id="sidebar-title-report-dateCreated" class="small pull-right m-t-xs">Année de l'étude</div>
+                  <p id="sidebar-title-report-articleBody"></p>
+                </a>
+              </li>
+              <li>
+
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+        <div id="tab-2" class="tab-pane">
+
+          <div class="sidebar-title">
+            <h3> <i class="fa fa-cube"></i> Latest projects</h3>
+            <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
+          </div>
+
+
+
+        </div>
+
+        <div id="tab-3" class="tab-pane">
+
+          <div class="sidebar-title">
+            <h3><i class="fa fa-gears"></i> Settings</h3>
+            <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
+          </div>
+
+          <div class="setings-item">
+                    <span>
+                        Show notifications
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
+                <label class="onoffswitch-label" for="example">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Disable Chat
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu" checked class="onoffswitch-checkbox" id="example2">
+                <label class="onoffswitch-label" for="example2">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Enable history
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example3">
+                <label class="onoffswitch-label" for="example3">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Show charts
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example4">
+                <label class="onoffswitch-label" for="example4">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Offline users
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" checked name="collapsemenu" class="onoffswitch-checkbox" id="example5">
+                <label class="onoffswitch-label" for="example5">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Global search
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" checked name="collapsemenu" class="onoffswitch-checkbox" id="example6">
+                <label class="onoffswitch-label" for="example6">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setings-item">
+                    <span>
+                        Update everyday
+                    </span>
+            <div class="switch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example7">
+                <label class="onoffswitch-label" for="example7">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-content">
+            <h4>Settings</h4>
+            <div class="small">
+              I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              And typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+              Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrascripts %}
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiaHVnb2xlaG91eCIsImEiOiItOHl6Sm5jIn0.12l_k0K_Z28UE-Jc0kDgpw';
+
+
+    var geojson = [
+    {% for report in listReports %}
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ report.longitude }},{{ report.latitude}}]
+      },
+      "properties": {
+        "icon": {
+          "className": 'my-icon',
+          "html": '1'
+        },
+        "title": "{{ report.name }}",
+        "popupContent":"<div class='leaflet-popup-header'><b><a href='{{ path('app_report_read', { 'slug': report.slug }) }}'>{{ report.name|upper }}</a></b></div><div style='padding-top:10px;'> Damien Joubert, Gaëtan Beuscart | 2015 <br/> <a href='{{ path('app_report_read', { 'slug': report.slug }) }}' class='btn btn-warning btn-block btn-sm' style='margin-top:10px;font-weight:bold;color:white;margin-left:55%;width:45%;' role='button' type='button'>Lire</a></div>"
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ];
+
+    var map = L.mapbox.map('map', 'hugolehoux.n5k07l88', { minZoom: 2, worldCopyJump: true }).setView([18, 22.5], 2);
+
+    L.control.layers({
+      "Satellite": L.mapbox.tileLayer("hugolehoux.n5k07l88"),
+      "Light": L.mapbox.tileLayer("hugolehoux.mi8n7fe4")
+    }, null).addTo(map);
+
+    var markers = L.markerClusterGroup({showCoverageOnHover: false, iconCreateFunction: function (cluster) {
+      var nbChilds = cluster.getChildCount();
+      var small =  nbChilds < 4;
+      var className = small ? 'my-icon' : 'my-icon-medium';
+      return L.divIcon({ html: nbChilds, className: className });
+    }
+    });
+    var geoJsonLayer = L.geoJson(geojson, {
+      onEachFeature: onEachFeature
+    });
+
+    markers.addLayer(geoJsonLayer);
+    map.addLayer(markers);
+
+    function onEachFeature(feature, layer) {
+      if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+        layer.setIcon(L.divIcon(feature.properties.icon));
+      }
+    }
+  </script>
+
+{% endblock %}

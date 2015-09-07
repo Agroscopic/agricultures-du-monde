@@ -23,6 +23,8 @@ class ReportAdmin extends Admin
             ))
             ->add('body','ckeditor')
             ->add('inLanguage','text')
+            ->add('latitude')
+            ->add('longitude')
         ;
     }
 
@@ -31,6 +33,7 @@ class ReportAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('slug')
         ;
     }
 
@@ -39,6 +42,8 @@ class ReportAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('slug')
+
         ;
     }
 }

@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class ReportRepository extends EntityRepository
 {
+    public function getReportsWithTags()
+    {
+        $qb = $this
+            ->createQueryBuilder('a')
+            ->leftJoin('a.tags', 'tags')
+            ->addSelect('tags')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
