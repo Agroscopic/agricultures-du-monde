@@ -5,6 +5,8 @@ namespace Application\Sonata\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\Report as Report;
+
 
 class User extends BaseUser
 {
@@ -14,7 +16,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Report", inversedBy="authors")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Report", mappedBy="reports")
      */
     private $reports;
 
@@ -51,7 +53,4 @@ class User extends BaseUser
     {
         return $this->reports;
     }
-
-
-
 }

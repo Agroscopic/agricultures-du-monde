@@ -15,10 +15,11 @@ class ReportAdmin extends Admin
             ->add('name', 'text', array('label' => 'Titre'))
             ->add('authors','sonata_type_model', array(
             'multiple' => true,
+                'by_reference' => false
             ))
             ->add('tags','sonata_type_model', array(
                 'multiple' => true,
-                'required' => false,
+                'by_reference' => false
             ))
             ->add('studyPeriodStart', 'collot_datetime', array( 'pickerOptions' =>
                 array('format' => 'MM yyyy',
@@ -54,8 +55,7 @@ class ReportAdmin extends Admin
             ))
             ->add('body','ckeditor')
             ->add('inLanguage','language')
-            ->add('latitude')
-            ->add('longitude')
+            ->add('latlng', 'oh_google_maps')
         ;
     }
 

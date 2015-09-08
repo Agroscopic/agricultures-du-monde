@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: @AppBundle/Resources/config/admin.yml }
-    # { resource: @ApplicationSonataClassificationBundle/Resources/config/admin.yml }
+    - { resource: @ApplicationSonataClassificationBundle/Resources/config/admin.yml }
 
 
 parameters:
@@ -36,12 +36,15 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'OhGoogleMapFormTypeBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ['AppBundle','FOSUserBundle','ApplicationSonataUserBundle','SonataUserBundle','SonataAdminBundle']
+    bundles:        ['AppBundle','FOSUserBundle','ApplicationSonataUserBundle','SonataUserBundle','SonataAdminBundle','OhGoogleMapFormTypeBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

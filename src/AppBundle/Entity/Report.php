@@ -4,7 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Oh\GoogleMapFormTypeBundle\Validator\Constraints as OhAssert;
 
 /**
  * Report
@@ -22,7 +23,6 @@ class Report
     public function __construct()
     {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->createdAt = new \DateTime();
 
     }
@@ -50,14 +50,28 @@ class Report
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", mappedBy="reports")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="reports")
+     * @ORM\JoinTable(name="report_authors",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="report_id", referencedColumnName="id", onDelete="CASCADE")
+     *   }
+     * )
      */
     private $authors;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", mappedBy="reports")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", inversedBy="reports")
+     * @ORM\JoinTable(name="report_tags",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")
+     *   }
+     * )
      */
     private $tags;
 
@@ -311,7 +325,7 @@ class Report
 
 
     /**
-     * Add authors
+     * Add author
      *
      * @param \Application\Sonata\UserBundle\Entity\User $author
      * @return Report
@@ -326,7 +340,7 @@ class Report
     }
 
     /**
-     * Remove authors
+     * Remove author
      *
      * @param \Application\Sonata\UserBundle\Entity\User $author
      */
@@ -349,7 +363,7 @@ class Report
 
 
     /**
-     * Add Tag
+     * Add tag
      *
      * @param \Application\Sonata\ClassificationBundle\Entity\Tag $tag
      * @return Report
@@ -364,7 +378,7 @@ class Report
     }
 
     /**
-     * Remove Tag
+     * Remove tag
      *
      * @param \Application\Sonata\ClassificationBundle\Entity\Tag $tag
      */
@@ -384,6 +398,8 @@ class Report
     {
         return $this->tags;
     }
+
+
 
     /**
      * Set createdAt
@@ -475,5 +491,21 @@ class Report
     public function getStudyPeriodEnd()
     {
         return $this->studyPeriodEnd;
+    }
+
+    public function setLatLng($latlng)
+    {
+        $this->setLatitude($latlng['lat']);
+        $this->setLongitude($latlng['lng']);
+        return $this;
+    }
+
+    /**
+     * @Assert\NotBlank()
+     * @OhAssert\LatLng()
+     */
+    public function getLatLng()
+    {
+        return array('lat'=>$this->getLatitude(),'lng'=>$this->getLongitude());
     }
 }

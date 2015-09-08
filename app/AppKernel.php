@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new SC\DatetimepickerBundle\SCDatetimepickerBundle(),
+            new Oh\GoogleMapFormTypeBundle\OhGoogleMapFormTypeBundle(),
             new AppBundle\AppBundle(),
         );
 
