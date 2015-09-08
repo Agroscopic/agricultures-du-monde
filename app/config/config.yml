@@ -3,8 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: @AppBundle/Resources/config/admin.yml }
-    - { resource: @ApplicationSonataClassificationBundle/Resources/config/admin.yml }
-
 
 parameters:
     locale: fr
