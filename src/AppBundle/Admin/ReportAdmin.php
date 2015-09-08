@@ -15,6 +15,8 @@ class ReportAdmin extends Admin
             ->add('name', 'text', array('label' => 'Titre'))
             ->add('authors')
             ->add('tags')
+            ->add('studyPeriodStart')
+            ->add('studyPeriodEnd')
             ->add('description','ckeditor', array(
                 'plugins' => array(
                     'uploadimage' => array(

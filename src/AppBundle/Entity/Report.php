@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ReportRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Report
 {
@@ -22,6 +23,7 @@ class Report
     {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
 
     }
 
@@ -96,7 +98,41 @@ class Report
     private $longitude;
 
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    private $createdAt;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \Datetime());
+    }
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="studyPeriodStart", type="date", nullable=true)
+     */
+    private $studyPeriodStart;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="studyPeriodEnd", type="date", nullable=true)
+     */
+    private $studyPeriodEnd;
 
     /**
      * Get id
@@ -347,5 +383,97 @@ class Report
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Report
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Report
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set studyPeriodStart
+     *
+     * @param \DateTime $studyPeriodStart
+     * @return Report
+     */
+    public function setStudyPeriodStart($studyPeriodStart)
+    {
+        $this->studyPeriodStart = $studyPeriodStart;
+
+        return $this;
+    }
+
+    /**
+     * Get studyPeriodStart
+     *
+     * @return \DateTime 
+     */
+    public function getStudyPeriodStart()
+    {
+        return $this->studyPeriodStart;
+    }
+
+    /**
+     * Set studyPeriodEnd
+     *
+     * @param \DateTime $studyPeriodEnd
+     * @return Report
+     */
+    public function setStudyPeriodEnd($studyPeriodEnd)
+    {
+        $this->studyPeriodEnd = $studyPeriodEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get studyPeriodEnd
+     *
+     * @return \DateTime 
+     */
+    public function getStudyPeriodEnd()
+    {
+        return $this->studyPeriodEnd;
     }
 }
