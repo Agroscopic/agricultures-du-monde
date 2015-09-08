@@ -7,7 +7,6 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Report as Report;
 
-
 class User extends BaseUser
 {
     /**
@@ -30,11 +29,12 @@ class User extends BaseUser
         return $this->id;
     }
 
-
     public function __construct()
     {
-        parent::__construct();
         $this->reports = new ArrayCollection();
+        parent::__construct();
+        $this->roles = array('ROLE_EDITOR');
+
     }
 
     public function addReport(Report $report)
@@ -53,4 +53,5 @@ class User extends BaseUser
     {
         return $this->reports;
     }
+
 }
