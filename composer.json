@@ -32,7 +32,8 @@
         "sonata-project/media-bundle": "^2.3",
         "tilleuls/ckeditor-sonata-media-bundle": "~1.0",
         "coresphere/console-bundle": "dev-master",
-        "oh/google-map-form-type-bundle": "dev-master"
+        "oh/google-map-form-type-bundle": "dev-master",
+        "stephanecollot/datetimepicker-bundle": "^1.0"
 
     },
     "require-dev": {

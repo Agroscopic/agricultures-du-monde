@@ -14,7 +14,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Report", mappedBy="authors")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Report", inversedBy="authors")
      */
     private $reports;
 

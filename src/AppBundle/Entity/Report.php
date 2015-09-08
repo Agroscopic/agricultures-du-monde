@@ -50,13 +50,13 @@ class Report
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="reports")
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\UserBundle\Entity\User", mappedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
     private $authors;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", inversedBy="reports")
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag", mappedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tags;
@@ -64,7 +64,7 @@ class Report
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true))
      */
     private $description;
 
@@ -86,14 +86,14 @@ class Report
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true))
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true))
      */
     private $longitude;
 

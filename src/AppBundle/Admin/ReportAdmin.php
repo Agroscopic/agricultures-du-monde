@@ -13,10 +13,37 @@ class ReportAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text', array('label' => 'Titre'))
-            ->add('authors')
-            ->add('tags')
-            ->add('studyPeriodStart')
-            ->add('studyPeriodEnd')
+            ->add('authors','sonata_type_model', array(
+            'multiple' => true,
+            ))
+            ->add('tags','sonata_type_model', array(
+                'multiple' => true,
+                'required' => false,
+            ))
+            ->add('studyPeriodStart', 'collot_datetime', array( 'pickerOptions' =>
+                array('format' => 'MM yyyy',
+                    'weekStart' => 0,
+                    'autoclose' => true,
+                    'startView' => 'year',
+                    'minView' => 'decade',
+                    'maxView' => 'year',
+                    'keyboardNavigation' => true,
+                    'language' => 'fr',
+                    'forceParse' => true,
+                    'pickerPosition' => 'top-right',
+                )))
+            ->add('studyPeriodEnd', 'collot_datetime', array( 'pickerOptions' =>
+                array('format' => 'MM yyyy',
+                    'weekStart' => 0,
+                    'autoclose' => true,
+                    'startView' => 'year',
+                    'minView' => 'decade',
+                    'maxView' => 'year',
+                    'keyboardNavigation' => true,
+                    'language' => 'fr',
+                    'forceParse' => true,
+                    'pickerPosition' => 'top-right',
+                )))
             ->add('description','ckeditor', array(
                 'plugins' => array(
                     'uploadimage' => array(
@@ -26,7 +53,7 @@ class ReportAdmin extends Admin
                 ),
             ))
             ->add('body','ckeditor')
-            ->add('inLanguage','text')
+            ->add('inLanguage','language')
             ->add('latitude')
             ->add('longitude')
         ;

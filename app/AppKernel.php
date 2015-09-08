@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
+            new SC\DatetimepickerBundle\SCDatetimepickerBundle(),
             new AppBundle\AppBundle(),
         );
 

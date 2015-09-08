@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: @AppBundle/Resources/config/admin.yml }
+    # { resource: @ApplicationSonataClassificationBundle/Resources/config/admin.yml }
+
 
 parameters:
     locale: fr
@@ -203,3 +205,6 @@ sonata_intl:
             - sonata.intl.timezone_detector.user
             - sonata.intl.timezone_detector.locale
         default: Europe/Paris
+
+sc_datetimepicker:
+    picker: ~

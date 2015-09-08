@@ -168,7 +168,7 @@
                             {% endif %}
                             {% if not loop.last %}, {% endif %}
                         {% endfor %}
-                        | 2015{# report.dateCreated | date('Y') #}<br/>
+                        | {{report.studyPeriodStart | date('Y') }}<br/>
                     </div>
 
                     {# LES MOTS-CLES #}
@@ -185,6 +185,7 @@
                     <div class="hr-line-dashed"></div>
 
                     {# LE RESUME DU RAPPORT #}
+
                     {% if report.description  is not empty %}
                         <h1>Résumé</h1>
                         {{ report.description | raw }}
