@@ -1,5 +1,8 @@
-{% extends "FOSUserBundle::layout_simple.html.twig" %}
-
+{% extends "SonataUserBundle::layout_simple.html.twig" %}
+{% block title %}{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}
+{% endblock title %}
 {% block pagecontent %}
+    <h2 style="text-align: center;margin-top: 5%">Atlas des Agricultures du Monde</h2>
+    <hr/>
 {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock pagecontent %}

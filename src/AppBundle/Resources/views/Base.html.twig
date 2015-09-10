@@ -61,6 +61,13 @@
                     </ul>
 
                 </li>
+                {% if is_granted("ROLE_EDITOR") %}
+
+                <li>
+                    <a href="{{ path('admin_app_report_create') }}"><i class="fa fa-pencil"></i> <span class="nav-label">AJOUTER ETUDE</span></a>
+                </li>
+                {% endif %}
+
                 {% block menus %}
 
                 {% endblock %}
